@@ -11,9 +11,10 @@ class Dealer < Player
   def more_card(card)
     puts '🂠 🂠 🂠'
     super
+    puts [@name, '']
   end
 
   def skip_move
-    puts 'Дилер пропустил ход'
+    puts ['Дилер пропустил ход', '']
   end
 end

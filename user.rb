@@ -7,5 +7,6 @@ class User < Player
   def more_card(card)
     super
     show_card(@cards)
+    puts [@name, '']
   end
 end
