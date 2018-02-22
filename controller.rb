@@ -24,15 +24,16 @@ class Controller
     @player.more?
   end
 
-  def more_card(user = @player)
-    user.more_card(@deck_cards.more_card)
-    show_cards(user)
-    dealer_actions if user.is_a? User
+  def more_card
+    @player.more_card(@deck_cards.more_card)
+    @dealer.actions(@deck_cards.more_card)
+    @dealer.more? ? [@player, @dealer].each { |user| show_cards(user) } : open_cards
   end
 
   def skip_move
     @player.skip_move
-    dealer_actions
+    @dealer.actions(@deck_cards.more_card)
+    [@player, @dealer].each { |user| show_cards(user) }
   end
 
   def open_cards
@@ -92,15 +93,5 @@ class Controller
   def reset_values
     [@player, @dealer].each{ |user| user.reset_values}
     @deck_cards.shuffle_deck
-  end
-
-  def dealer_actions
-    if @dealer.points >= 17
-      @dealer.skip_move
-      puts ['Дилер пропустил ход', '']
-    else
-      more_card(@dealer)
-      open_cards unless player_more?
-    end
   end
 end
