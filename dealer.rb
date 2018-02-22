@@ -7,7 +7,7 @@ class Dealer < Player
     if @points >= 17
       skip_move
     else
-      more_card(card)
+      more_card(card.more_card)
     end
   end
 end

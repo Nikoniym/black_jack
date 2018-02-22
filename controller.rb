@@ -26,13 +26,13 @@ class Controller
 
   def more_card
     @player.more_card(@deck_cards.more_card)
-    @dealer.actions(@deck_cards.more_card)
+    @dealer.actions(@deck_cards)
     @dealer.more? ? [@player, @dealer].each { |user| show_cards(user) } : open_cards
   end
 
   def skip_move
     @player.skip_move
-    @dealer.actions(@deck_cards.more_card)
+    @dealer.actions(@deck_cards)
     [@player, @dealer].each { |user| show_cards(user) }
   end
 
